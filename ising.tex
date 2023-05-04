@@ -12,10 +12,15 @@
 \renewcommand{\bfdefault}{bx}
 %図のとりこみ
 \usepackage{graphicx}
-
+\usepackage{physics}
 %文献
 \usepackage{hep-bibliography}
 \bibliography{ref.bib}
+
+\newcommand{\Zb}{\mathbb{Z}}
+\newcommand{\Kt}{\widetilde{K}}
+\newcommand{\ZIs}{Z_{\mathrm{Ising}}}
+\newcommand{\ZGIs}{Z_{\mathrm{Ising}/\mathbb{Z}_2}}
 
 \begin{document}
 
@@ -32,12 +37,50 @@
 
 もちろんKW双対性の導出は少し詳しい目の統計力学の教科書に出ている。それこのノートであらためてまとめておこうと思ったのは２つの理由がある。
 
-１つは熱力学極限だけでなく、精密な双対性について述べたかったからである。もちろんIsing模型の相転移点の決定などに使う場合には熱力学極限だけで十分である。しかし、最近のトポロジカルな議論に使う場合には、離散対称性のゲージ化に関する精密な議論が必要である。ここではそれも含めて導出する。
+１つは熱力学極限だけでなく、精密な双対性について述べたかったからである。
+もちろんIsing模型の相転移点の決定などに使う場合には熱力学極限だけで十分である。
+しかし、最近のトポロジカルな議論に使う場合には、離散対称性のゲージ化に関する精密な議論が必要である。
+ここではそれも含めて導出する。
 
 もう一つは高次元への一般化を紹介したかったからである\cite{Wegner:1971app}。
 こちらも最近のトポロジカルな議論での良いモデルになる。
 
+Ising模型は次のようなものである。2次元の正方格子を考える。ここでは有限の格子でトーラス状に周期境界条件が課されているとする。サイトのラベルを$i,j$とする。各サイトに「スピン」の自由度$a_{i}=0,1$を置く。各リンクを両端のサイトのラベル$i,j$を用いて$\expval{ij}$のように表す。定数のパラメーターを$K$としてイジング模型の分配関数は
+\begin{align}
+  \ZIs(K)=\sum_{\{a\}} \exp\left(
+    K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
+  \right).
+\end{align}
+ここで$\sum_{\{a\}}$はすべてのスピンの配位についての和である。
+
+一方で、Ising模型の$\Zb_2$対称性をゲージ化した模型の分配関数は、
+\begin{align}
+  \ZGIs(K)=\frac12 \sum_{\text{boundary conditions}}
+  \sum_{\{a\}}\exp\left(
+    K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
+  \right)
+\end{align}
+となる。ここで$\sum_{\text{boundary conditions}}$はトーラスの2つの周期の方向の境界条件を周期境界条件か反周期境界条件のどちらかを選ぶ4通りの境界条件についての和である。弦理論をご存知の方は、「オービフォールド」の操作をしたものである。
+
+Kramers-Wannier双対性の厳密な表式は
+\begin{align}
+  \frac{1}{(\sinh 2K)^{2V}}\ZGIs(K)=
+  \frac{1}{(\sinh 2\Kt)^{2V}}\ZIs(\Kt)
+  \label{KWduality}
+\end{align}
+である。因子$\frac{1}{(\sinh 2K)^{2V}}$は局所的な項として作用に入れることができる。したがって、この式は二つの系の等価性を表している。このノートの目的は、この式の証明を与えることと、その高次元の対応物について説明することである。
+
 \section{Kramers-Wannier双対性の導出}
+証明に関して次のような系を考える。まず、各リンク$\ell$に自由度$b_{\ell}=0,1$を置く。また、各プラケット$p$に自由度$c_{p}$を置く。その分配関数を
+\begin{align}
+  Z(K)=\sum_{\{b\}}\frac{1}{2^{V}} \exp\left[
+    K\sum_{\ell:\text{links}}(-1)^{b_{\ell}}+i\pi\sum_{\substack{p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}:\\ \text{plaquettes}}} c_{p}(b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4})
+  \right]
+  \label{model1}
+\end{align}
+とする。$p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}$はプラケット$p$を構成する4辺が$\ell_1, \ell_2, \ell_3, \ell_4$ということである。
+
+方針としては、式\eqref{model1}を二つのやり方で変形したのが、大雑把に言って\eqref{KWduality}の左辺と右辺となる。
 
 \subsection{第１の変形}
 
