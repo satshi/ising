@@ -21,6 +21,7 @@
 \newcommand{\Kt}{\widetilde{K}}
 \newcommand{\ZIs}{Z_{\mathrm{Ising}}}
 \newcommand{\ZGIs}{Z_{\mathrm{Ising}/\mathbb{Z}_2}}
+\newcommand{\deltamod}{\delta^{\mathrm{mod}\ 2}}
 
 \begin{document}
 
@@ -59,6 +60,7 @@ Ising模型は次のようなものである。2次元の正方格子を考え�
   \sum_{\{a\}}\exp\left(
     K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
   \right)
+  \label{Ising/Z2}
 \end{align}
 となる。ここで$\sum_{\text{boundary conditions}}$はトーラスの2つの周期の方向の境界条件を周期境界条件か反周期境界条件のどちらかを選ぶ4通りの境界条件についての和である。弦理論をご存知の方は、「オービフォールド」の操作をしたものである。
 
@@ -83,8 +85,43 @@ Kramers-Wannier双対性の厳密な表式は
 方針としては、式\eqref{model1}を二つのやり方で変形したのが、大雑把に言って\eqref{KWduality}の左辺と右辺となる。
 
 \subsection{第１の変形}
+第１の変形では、まず$c$についての和を評価する。用いる式は整数$b$に対して 
+\begin{align}
+  \frac12\sum_{c=0,1}\exp(i\pi c b )
+  =\deltamod_{b,0}
+  :=
+  \begin{cases}
+    1& (b=0 \mod 2)\\
+    1& (b=1 \mod 2)
+  \end{cases}.
+\end{align}
+この式を用いると
+\begin{align}
+  Z(K)=\sum_{\{b\}}\frac{1}{2^{V}} \exp\left[
+    K\sum_{\ell:\text{links}}(-1)^{b_{\ell}}
+    \right]
+    \prod_{\substack{p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}:\\ \text{plaquettes}}} \deltamod_{b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4}}
+    \label{model1-1-1}
+\end{align}
+を得る。
 
+式\eqref{model1-1-1}から、寄与が$0$でない$b_{\ell}$の配位は各サイトに置いたスピン$a_{i}$と「だいたい」１対１対応していることが分かる。与えられた$a_{i}$の配位に対して$b_{\expval{ij}}=a_i-a_j \mod 2$とすれば、プラケットが$0$の$b$の配位が得られる。
+
+逆にプラケットがすべて$0$である$b_{\ell}$の配位から次のようにして$a_{i}$の配位を得る。原点のサイト$0$を一つ固定する。サイト$0$からサイト$i$までのリンクを辿っていく経路をとり、$a_i$をその経路上の$b_{\ell}$全てと$a_0$を足したものの$\mod 2$で与える。$b$のプラケットがすべて$0$なので、経路のプラケット１つ分の変形、そしてそれを繰り返して得られる変形で不変である。
+
+「だいたい」と言ったのは、次の２点で１対１対応では無いからである。
+\begin{itemize}
+  \item $b$の配位を決めたとき、$a_0$の値は任意である。つまり、$b$の配位を決めたとき、対応する$a$の配位は２種類ある。
+  \item $b$から$a$を作るとき、経路によらないわけではない。非自明なサイクルでの$b$の和の偶奇は考慮しなければならない。
+\end{itemize}
+これらを正しく考慮すると
+\begin{align}
+  Z(K)=\ZGIs(K)
+\end{align}
+を得る。式\eqref{Ising/Z2}の$\ZGIs(K)$で全体にかかっている$1/2$が前者からくるもの、境界条件に関する和が後者から来るものである。
 \subsection{第２の変形}
+
+
 
 \subsection{双対性のまとめ}
 
