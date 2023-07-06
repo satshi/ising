@@ -128,19 +128,62 @@ Kramers-Wannier双対性の厳密な表式は
 \end{itemize}
 これらを正しく考慮すると
 \begin{align}
-  Z(K)=\ZGIs(K)
+  Z(K)=\ZGIs(K)\label{1st}
 \end{align}
 を得る。式\eqref{Ising/Z2}の$\ZGIs(K)$で全体にかかっている$1/2$が前者からくるもの、境界条件に関する和が後者から来るものである。
 
 \subsection{第２の変形}
 
+\begin{figure}
+  \centering
+  \includegraphics{link_plaquette.pdf}
+  \caption{{}}
+  \label{fig:link_plaquette}
+\end{figure}
+
+第２の変形では、\eqref{model1}で、まず$b$についての和をとる。１つのリンク$\ell$に注目し、$b_{\ell}$についての和を考える。$\ell$は図\ref{fig:link_plaquette}のように２つのプラケット$p_1,p_2$に共有されている。言い換えれば$\ell$に直交する双対格子のリンクが２つの双対格子のサイト$p_1,p_2$を繋いでいる。分配関数を$b_{\ell}$を含む因子に分けて
+\begin{align}
+  Z(K)=&\sum_{\{c\}}\prod_{\ell}Z_{\ell}\\
+  Z_{\ell}:=&\sum_{b_{\ell}=0,1}\exp\left[
+    K(-1)^{b_{\ell}}+i\pi (c_{p_1}+c_{p_2})b_{\ell}
+  \right]
+  =e^{K}+(-1)^{c}e^{-K}
+\end{align}
+となる。ここで$c:=c_{p_1}+c_{p_2}$とした。これをさらに変形して
+\begin{align}
+  Z_{\ell}=2\cosh K (\tanh K)^{c}
+  =\sqrt{2\sinh 2K}\ e^{\Kt(-1)^c}
+\end{align}
+となる。ここで$\Kt$は
+\begin{align}
+  \tanh K = e^{-2\Kt}
+\end{align}
+の式で定義した。ここから
+\begin{align}
+  \sinh 2 K \sinh 2\Kt =1 \label{dualK}
+\end{align}
+の式が導かれる。詳しい計算は付録\ref{sec:calculation}に書いておく。
+
+これを用いると分配関数は次のように書かれる。
+\begin{align}
+  Z(K)&=\sum_{\{c\}}\frac{1}{2^V}\prod_{\ell}Z_{\ell}\notag\\
+  &=\sum_{\{c\}}\frac{1}{2^V}\prod_{\ell=\expval{pq}}\sqrt{2\sinh 2K}\ e^{\Kt(-1)^c}\notag\\
+  &=(\sinh 2K)^{V}\sum_{\{c\}}\prod_{\ell=\expval{pq}} e^{\Kt(-1)^c}\notag\\
+  &=(\sinh 2K)^{V}\ZIs(\Kt).
+\end{align}
 
 
 \subsection{双対性のまとめ}
 
+第１の変形の結果\eqref{1st}、$K,\Kt$の関係式\eqref{dualK}と合わせてKramerse-Wannier双対性の式\eqref{KWduality}が成り立つことが証明される。
+
 \section{双対性からの帰結}
 
 \section{高次元への一般化}
+
+\appendix
+\section{計算}
+\label{sec:calculation}
 
 \printbibliography
 \end{document}
