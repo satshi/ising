@@ -17,6 +17,27 @@
 \usepackage{hep-bibliography}
 \bibliography{ref.bib}
 
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+%\usepackage{cleveref}
+
+% font warningを出さないため
+% \DeclareFontShape{JY2}{hgt}{b}{n}{<->ssub*hgt/bx/n}{}
+% \DeclareFontShape{JY2}{hgt}{m}{it}{<->ssub*hgt/m/n}{}
+% \DeclareFontShape{JT2}{hgt}{b}{n}{<->ssub*hgt/bx/n}{}
+% \DeclareFontShape{JT2}{hgt}{m}{it}{<->ssub*hgt/m/n}{}
+
+\newenvironment{myquote}{\begin{tcolorbox}[
+  colback = blue!5, after = \noindent] }{\end{tcolorbox}}
+\newenvironment{important}{\begin{tcolorbox}[
+  colback = white,
+  colframe = red!35,
+  boxrule = 2mm,
+  fonttitle = \bfseries,
+  after = \noindent] }{\end{tcolorbox}}
+\newenvironment{mycite}{\\ \qquad \textbullet\ }{\\}
+
+
 \newcommand{\Zb}{\mathbb{Z}}
 \newcommand{\Kt}{\widetilde{K}}
 \newcommand{\ZIs}{Z_{\mathrm{Ising}}}
@@ -42,30 +63,36 @@
 ここではそれも含めて導出する。
 
 Ising模型は次のようなものである。2次元の正方格子を考える。ここでは有限の格子でトーラス状に周期境界条件が課されているとする。サイトのラベルを$i,j$とする。各サイトに「スピン」の自由度$a_{i}=0,1$を置く。各リンクを両端のサイトのラベル$i,j$を用いて$\expval{ij}$のように表す。定数のパラメーターを$K>0$としてイジング模型の分配関数は
+\begin{important}
 \begin{align}
   \ZIs(K)=\sum_{\{a\}} \exp\left(
     K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
   \right).
 \end{align}
+\end{important}
 ここで$\sum_{\{a\}}$はすべてのスピンの配位についての和である。
 
 一方で、Ising模型の$\Zb_2$対称性をゲージ化した模型の分配関数は、
-\begin{align}
-  \ZGIs(K)=\frac12 \sum_{\text{boundary conditions}}
-  \sum_{\{a\}}\exp\left(
-    K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
-  \right)
-  \label{Ising/Z2}
-\end{align}
+\begin{important}
+  \begin{align}
+    \ZGIs(K)=\frac12 \sum_{\text{boundary conditions}}
+    \sum_{\{a\}}\exp\left(
+      K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
+    \right)
+    \label{Ising/Z2}
+  \end{align}    
+\end{important}
 となる。ここで$\sum_{\text{boundary conditions}}$はトーラスの2つの周期の方向の境界条件を周期境界条件か反周期境界条件のどちらかを選ぶ4通りの境界条件についての和である。弦理論をご存知の方は、「オービフォールド」の操作をしたものである。
 
-Kramers-Wannier双対性の厳密な表式は
-\begin{align}
-  \frac{1}{(\sinh 2K)^{2V}}\ZGIs(K)=
-  \frac{1}{(\sinh 2\Kt)^{2V}}\ZIs(\Kt)
-  \label{KWduality}
-\end{align}
-である。因子$\frac{1}{(\sinh 2K)^{2V}}$は局所的な項として作用に入れることができる。したがって、この式は二つの系の等価性を表している。このノートの目的は、この式の証明を与えることと、その高次元の対応物について説明することである。
+Kramers-Wannier双対性の厳密な表式はサイトの数を$V$として
+\begin{important}
+  \begin{align}
+    \frac{1}{(\sinh 2K)^{2V}}\ZGIs(K)=
+    \frac{1}{(\sinh 2\Kt)^{2V}}\ZIs(\Kt),\quad \sinh 2K \sinh 2\Kt=1
+    \label{KWduality}
+  \end{align}  
+\end{important}
+である。因子$\frac{1}{(\sinh 2K)^{2V}}$は局所的な項として作用に入れることができる。したがって、この式は二つの系の等価性を表している。このノートの目的は、この式の証明を与えることと、関連する事柄について説明することである。
 
 \section{Kramers-Wannier双対性の導出}
 証明に関して次のような系を考える。まず、各リンク$\ell$に自由度$b_{\ell}=0,1$を置く。また、各プラケット$p$に自由度$c_{p}$を置く。その分配関数を
@@ -92,7 +119,7 @@ Kramers-Wannier双対性の厳密な表式は
 \end{align}
 という恒等式である。この式を用いると
 \begin{align}
-  Z(K)=\sum_{\{b\}}\frac{1}{2^{V}} \exp\left[
+  Z(K)=\sum_{\{b\}}\exp\left[
     K\sum_{\ell:\text{links}}(-1)^{b_{\ell}}
     \right]
     \prod_{\substack{p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}:\\ \text{plaquettes}}} \deltamod_{b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4}}
@@ -119,7 +146,7 @@ Kramers-Wannier双対性の厳密な表式は
 「だいたい」と言ったのは、次の２点で１対１対応では無いからである。
 \begin{itemize}
   \item $b$の配位を決めたとき、$a_0$の値は任意である。つまり、$b$の配位を決めたとき、対応する$a$の配位は２種類ある。
-  \item $b$から$a$を作るとき、経路によらないわけではない。プラケット１つ分の変形を繰り返すことでは繋がらない経路がある。この経路への依存性は、非自明なサイクルでの$b$の和の偶奇で特徴づけられる。つまり、$b$の配位と対応する$a$の配位は非自明なサイクルに関して周期境界条件あるいは反周期境界条件を持つものすべてを考えなければならない。
+  \item $b$から$a$を作るとき、経路によらないわけではない。プラケット１つ分の変形を繰り返すことでは繋がらない経路がある。この経路への依存性は、非自明なサイクルでの$b$の和の偶奇で特徴づけられる。逆に言えば、周期境界条件の$a$の配位からは非自明なサイクルでの$b$の和が偶数になる$b$の配位しか得られない。つまり、すべての$b$の配位と対応する$a$の配位は非自明なサイクルに関して周期境界条件あるいは反周期境界条件を持つものすべてを考えなければならない。
 \end{itemize}
 これらを正しく考慮すると
 \begin{align}
@@ -138,7 +165,7 @@ Kramers-Wannier双対性の厳密な表式は
 
 第２の変形では、\eqref{model1}で、まず$b$についての和をとる。１つのリンク$\ell$に注目し、$b_{\ell}$についての和を考える。$\ell$は図\ref{fig:link_plaquette}のように２つのプラケット$p_1,p_2$に共有されている。言い換えれば$\ell$に直交する双対格子のリンクが２つの双対格子のサイト$p_1,p_2$を繋いでいる。分配関数を$b_{\ell}$を含む因子に分けて
 \begin{align}
-  Z(K)=&\sum_{\{c\}}\prod_{\ell}Z_{\ell}\\
+  Z(K)=&\sum_{\{c\}}\frac{1}{2^V}\prod_{\ell}Z_{\ell}\\
   Z_{\ell}:=&\sum_{b_{\ell}=0,1}\exp\left[
     K(-1)^{b_{\ell}}+i\pi (c_{p_1}+c_{p_2})b_{\ell}
   \right]
@@ -147,7 +174,7 @@ Kramers-Wannier双対性の厳密な表式は
 となる。ここで$c:=c_{p_1}+c_{p_2}$とした。これをさらに変形して
 \begin{align}
   Z_{\ell}=2\cosh K (\tanh K)^{c}
-  =\sqrt{2\sinh 2K}\ e^{\Kt(-1)^c}
+  =\sqrt{2\sinh 2K}\ e^{\Kt(-1)^c}\label{Zelltemp}
 \end{align}
 となる。ここで$\Kt$は
 \begin{align}
@@ -172,13 +199,56 @@ Kramers-Wannier双対性の厳密な表式は
 
 第１の変形の結果\eqref{1st}、$K,\Kt$の関係式\eqref{dualK}と合わせてKramerse-Wannier双対性の式\eqref{KWduality}が成り立つことが証明される。
 
-\section{双対性からの帰結}
-
-\section{高次元への一般化}
+\section{対称性と無秩序スピン}
 
 \appendix
 \section{計算}
 \label{sec:calculation}
+まず式\eqref{dualK}を導出しよう。
+\begin{align}
+  \frac{\sinh K}{\cosh K}=\tanh K = e^{-2\Kt}
+  \label{KKt}
+\end{align}
+のとき、両辺の逆数をとって
+\begin{align}
+  \frac{\cosh K}{ \sinh K} = e^{2\Kt}
+\end{align}
+を得る。これらを引き算して
+\begin{align}
+  \frac{\cosh K}{\sinh K}-\frac{\sinh K}{\cosh K}=e^{2\Kt}-e^{-2\Kt}=2\sinh 2\Kt.
+\end{align}
+左辺を変形して
+\begin{align}
+  (\text{左辺})=\frac{\cosh^2K-\sinh^2 K}{\sinh K \cosh K}=\frac{1}{\frac{1}{2}\sinh 2K}
+\end{align}
+となる。したがって
+\begin{align}
+  \sinh 2K \sinh 2\Kt =1
+\end{align}
+を得る。これは式\eqref{dualK}である。
 
+次に式\eqref{Zelltemp}を導出しよう。次のような変形を考える。
+\begin{align}
+  \sinh 2K = 2\cosh K \sinh K = 2 \cosh^2 K \tanh K =2\cosh^2 K e^{-2\Kt}.
+\end{align}
+最後の変形では\eqref{KKt}の関係を用いた。この式から
+\begin{align}
+  \cosh^2 K = \frac12 \sinh 2K e^{2\Kt}
+\end{align}
+を得るので、両辺の平方根をとって
+\begin{align}
+  \cosh K = \frac{1}{\sqrt{2}}\sqrt{\sinh 2K} e^{\Kt}
+\end{align}
+を得る。これと\eqref{KKt}を$2\cosh K (\tanh K)^c$に代入して
+\begin{align}
+  2\cosh K (\tanh K)^c
+  =\sqrt{2\sinh 2K}e^{\Kt -2\Kt c}
+  =\sqrt{2\sinh 2K}e^{\Kt (-1)^c}
+\end{align}
+を得る。これは式\eqref{Zelltemp}である。ここで$c=0,1$の場合に成り立つ恒等式
+\begin{align}
+  1-2c=(-1)^c
+\end{align}
+を用いた。
 \printbibliography
 \end{document}
