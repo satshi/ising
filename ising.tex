@@ -67,10 +67,10 @@ Ising模型は次のようなものである。2次元の正方格子を考え�
 \begin{align}
   \ZIs(K)=\sum_{\{a\}} \exp\left(
     K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
-  \right).
+  \right).\label{Ising}
 \end{align}
 \end{important}
-ここで$\sum_{\{a\}}$はすべてのスピンの配位についての和である。
+ここで$\sum_{\{a\}}$はすべてのスピンの配位についての和である。パラメーター$K$のことを「逆温度」と呼ぶことにする。\footnote{厳密には本当の逆温度を$\beta$、結合のパラメーターを$J$として$K=\beta J$である。ただ、この二つのパラメーターは$K$の形でしか現れない。}
 
 一方で、Ising模型の$\Zb_2$対称性をゲージ化した模型の分配関数は、
 \begin{important}
@@ -116,10 +116,11 @@ Kramers-Wannier双対性の厳密な表式はサイトの数を$V$として
     1& (b=0 \mod 2)\\
     0& (b=1 \mod 2)
   \end{cases}
+  \label{deltamod}
 \end{align}
 という恒等式である。この式を用いると
 \begin{align}
-  Z(K)=\sum_{\{b\}}\exp\left[
+  Z(K)=\sum_{\{b\}}\sum_{\{c\}}\exp\left[
     K\sum_{\ell:\text{links}}(-1)^{b_{\ell}}
     \right]
     \prod_{\substack{p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}:\\ \text{plaquettes}}} \deltamod_{b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4}}
@@ -200,6 +201,65 @@ Kramers-Wannier双対性の厳密な表式はサイトの数を$V$として
 第１の変形の結果\eqref{1st}、$K,\Kt$の関係式\eqref{dualK}と合わせてKramerse-Wannier双対性の式\eqref{KWduality}が成り立つことが証明される。
 
 \section{対称性と無秩序スピン}
+
+この節では、KW双対性の周辺に出てくる事項、特に対称性と無秩序スピンについて解説する。
+
+\subsection{ゲージ化されたIsing模型のゲージ不変な定式化}
+
+ここでは、式\eqref{Ising}から始めて、ゲージ化されたIsingの作用をゲージ不変な形に書いておく。
+
+Ising模型\eqref{Ising}に次のような操作をしてゲージ化する。
+\begin{itemize}
+  \item 通常の格子ゲージ理論と同様に各リンク$\ell$に$\Zb_2$の元$b_{\ell}$を配置する。
+  \item $b_{\ell}$の作用は「プラケットの値が$0$」というものにする。これは通常のWilsonのプラケット作用で弱結合極限をとったものである。具体的には各プラケット$p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}$に対して$\deltamod_{b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4},0}$の重みをかける。さらにこれを式\eqref{deltamod}を用いて
+  \begin{align}
+    \deltamod_{b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4},0}=\sum_{c_p=0,1}\frac{1}{2}e^{\pi i (b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4})}
+  \end{align}
+  と書き換えておく。\footnote{このようなゲージ化を一般の格子ゲージ理論と区別して「トポロジカルなゲージ化」と呼ぶこともある。}
+  \item ゲージ対称性を課す。ゲージ変換のパラメーターは各サイト$i$に置かれた$\lambda_i=0,1$である。リンク$\ell=\expval{ij}$上のゲージ場$b_{\expval{ij}}$とサイト$i$のスピン$a_{i}$はそれぞれ
+  \begin{align}
+    b_{\expval{ij}}'=b_{\expval{ij}}+\lambda_{i}+\lambda_{j},\quad
+    a_{i}'=a_{i}+\lambda_{i}
+    \label{gaugetransf}
+  \end{align}
+  と変換する。ゲージ変換で繋がっている配位は物理的に同じと考えるので、すべての配位を足し上げると$2^V$の数えすぎが生じる。これを解消するために、最後に分配関数を$2^{V}$で割っておく。
+  \item Ising スピンとゲージ場の結合は通常の格子ゲージ理論と同様のである。つまり各リンクの重みを
+  \begin{align}
+    \exp\qty[K (-1)^{a_i+a_j+b_{\expval{ij}}}]
+  \end{align}
+  とする。これはゲージ不変である。
+\end{itemize}
+
+すべてまとめると、ゲージ化されたIsing模型の分配関数は
+\begin{align}
+  \ZGIs(K)=\sum_{\{a\}}\sum_{\{b\}}\sum_{\{c\}}\frac{1}{2^{2V}} \exp\left[
+    K\sum_{\expval{ij}:\text{links}}(-1)^{a_i+a_j+b_{\expval{ij}}}+i\pi\sum_{\substack{p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}:\\ \text{plaquettes}}} c_{p}(b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4})
+  \right]
+  \label{model2}
+\end{align}
+となる。ここでゲージ固定$a_{i}=0$を行うと式\eqref{model1}になり、第１の変形の結果\eqref{1st}から\eqref{Ising/Z2}の形と同じになることが分かる。また前節の解析の結果から、これは逆温度が$\Kt$（式\eqref{dualK}参照）のIsing模型と（全体にかかる定数を除いて）同じである。
+
+\subsection{様々な演算子}
+式\eqref{model2}に含まれる自由度で書ける様々な自由度について考えよう。次の３種類について考える。
+\begin{itemize}
+  \item $c_p$から作るスピン演算子$\sigma_{p}=(-1)^{c_p}$
+  \item $b_{\ell}$から作るWilsonループ演算子$\eta(C)=(-1)^{\sum_{k}b_{\ell_k}}$。ただし、$C$はリンク$\ell_1,\ell_2,\dots$から作られる閉じたループである。
+  \item $a_i$から作るスピン演算子。$\mu_{i}\sim (-1)^{a_i}$
+\end{itemize}
+
+これらの演算子を作用\eqref{model2}の中だけで考えるなら、特に問題になることはない。その演算子の相関関数は通常どおり計算できる。これから考えたいのは上の演算子を、$a,b$の和をとってしまって得られる、$c$をIsing模型の中で考えることである。注意してほしいのは、$a,b$の和をとってしまったとしても、これらの演算子が無くなるわけではない。作用に出てくる場の関数として書けなくなるだけである。
+
+スピン演算子$\sigma_{p}=(-1)^{c_p}$については、$a,b$を積分してしまった後も特に注意することはない。Ising模型に出てくるスピン変数で、相転移の秩序変数となる重要な演算子である。
+
+$\eta$と$\mu$については注意が必要なので、以下で順に見ていく。
+
+
+\subsection{対称性欠陥}
+
+
+
+\subsection{無秩序スピン}
+
 
 \appendix
 \section{計算}
