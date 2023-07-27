@@ -156,7 +156,7 @@ Kramers-Wannier双対性の厳密な表式はサイトの数を$V$として
 を得る。式\eqref{Ising/Z2}の$\ZGIs(K)$で全体にかかっている$1/2$が前者からくるもの、境界条件に関する和が後者から来るものである。
 
 \subsection{第２の変形}
-
+\label{sec:second}
 \begin{figure}
   \centering
   \includegraphics{link_plaquette.pdf}
@@ -190,8 +190,8 @@ Kramers-Wannier双対性の厳密な表式はサイトの数を$V$として
 これを用いると分配関数は次のように書かれる。
 \begin{align}
   Z(K)&=\sum_{\{c\}}\frac{1}{2^V}\prod_{\ell}Z_{\ell}\notag\\
-  &=\sum_{\{c\}}\frac{1}{2^V}\prod_{\ell=\expval{pq}}\sqrt{2\sinh 2K}\ e^{\Kt(-1)^c}\notag\\
-  &=(\sinh 2K)^{V}\sum_{\{c\}}\prod_{\ell=\expval{pq}} e^{\Kt(-1)^c}\notag\\
+  &=\sum_{\{c\}}\frac{1}{2^V}\prod_{\ell=\expval{pq}}\sqrt{2\sinh 2K}\ e^{\Kt(-1)^{c_p+c_q}}\notag\\
+  &=(\sinh 2K)^{V}\sum_{\{c\}}\prod_{\ell=\expval{pq}} e^{\Kt(-1)^{c_p+c_q}}\notag\\
   &=(\sinh 2K)^{V}\ZIs(\Kt).
 \end{align}
 
@@ -256,8 +256,17 @@ $\eta$と$\mu$については注意が必要なので、以下で順に見てい
 
 \subsection{対称性欠陥}
 
+今考えている理論では、$b$のプラケットをすべて$1$にしているので、Wilsonループ$\eta(C)$は$C$をプラケット１個分変形しても値を変えない。このような性質を「トポロジカル」であるという。
 
+トポロジカルな演算子（欠陥）は、（一般化）対称性を記述する。$\eta$が、$\sigma$スピンの反転という普通の対称性を記述する欠陥であることが次のようにして分かる。プラケット$p$に演算子$\sigma_{p}=(-1)^{c_p}$を挿入し、それを囲む経路$C$をとって$\eta(C)$を挿入する。$\eta(C)$はトポロジカルなので、値を変えずに$p$のプラケットまで縮めることができる。作用\eqref{model2}を見ると、この$\eta$の挿入は、和を取っている変数の変換$c_p'=c_p+1$で吸収することができる。このとき$\sigma_{p}=(-1)^{c_p}=-(-1)^{c'_p}$となる。したがって、次のようなWard-Takahashi恒等式が成り立つ。
+これは、$\eta$が$\sigma$を反転する対称性欠陥であることを示している。
 
+$a,b$を積分してしまった後で$\eta$がどのように表現されるか考えよう。$\eta(C)$を挿入した後で\ref{sec:second}項と同様に$a,b$を積分すると、$C$に含まれるリンクの相互作用に$(-1)$が余分にかかる。
+\begin{align}
+  \expval{\eta(C)\cdots}
+  =\frac{1}{\ZIs}\sum_{\{c\}}\prod_{\ell=\expval{pq}} e^{\Kt(-1)^{c_p+c_q+\delta_{\expval{pq}}(C)}}\cdots
+\end{align}
+となる。ここで$\delta_{\ell}(C)$はリンク$\ell$が$C$と交わっていれば$1$、そうでなければ$0$という記号である。つまり、$C$と交わっているリンクは、相互作用が反強磁性に置き換わっている。
 \subsection{無秩序スピン}
 
 
