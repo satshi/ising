@@ -279,7 +279,32 @@ $a,b$を積分してしまった後で$\eta$がどのように表現されるか
   \label{fig:z2defect}
 \end{figure}
 \subsection{無秩序スピン}
+式\eqref{model2}で表される模型でのサイト$i$に置かれた演算子$(-1)^{a_i}$について考えよう。まず重要なことは$(-1)^{a_i}$そのものはゲージ不変でないので、統計力学での良い演算子ではない。これが入った相関関数を考えると、いつでも$0$になってしまうのである。
 
+\begin{figure}
+  \centering
+  \includegraphics{disorder.pdf}
+  \caption{赤い線が$\eta$線演算子で両端の$\mu_i,\mu_j$が無秩序スピン演算子である。この形でゲージ不変になっている。}
+  \label{fig:disorder}
+\end{figure}
+
+これをゲージ不変にするために$\eta$線演算子（$b$ Wilson line）をくっつけて
+$\mu_i=(-1)^{a_i+b_{\ell_1}+b_{\ell_2}+\dots}$を考える（図\ref{fig:disorder}参照）。ただし、$\ell_1,\ell_2,\dots$は$i$に端をもつ経路である。この演算子を（$(-1)^{c_p}$を秩序演算子としてのスピン演算子と言うのに対応して）無秩序演算子(disorder operator)とかスピン(disorder spin)と呼ばれる。次のようなことに注意する必要がある。
+\begin{itemize}
+  \item $\mu_i$は位置$i$だけでなく、くっつくWilson lineの経路によっている。ただし、Wilson lineはトポロジカルなので、Wilson lineの連続変形にはよっていない。このような演算子を非純正局所演算子(non-genuine local operator)と呼ぶことがある。反対の言葉は純正局所演算子(genuine local operator)で、スピン演算子$\sigma_{p}$はその例である。
+  \item 端のあるWilson lineは必ず反対側の端がある。したがって$\mu_i$は必ずペアで現れなければならない。
+  \item 無秩序スピンの名前の由来は次のようなものである。$\sigma$スピン演算子（秩序演算子）の言葉で秩序相にあるときは、$\mu_i$の期待値が$0$になる（正確に言うなら、$\mu$を挿す２点を遠くに離す極限で２点関数が$0$になる）。逆に無秩序相にあるときは、$\mu$演算子が期待値を持つ（正確に言うなら、$\mu$を挿す２点を遠くに離す極限で２点関数が$0$にならない）。
+\end{itemize}
+
+$a,b$の和を取ってしまった後で無秩序スピンがどうなるか見てみよう。基本的に$\mu$はプラケットの中心に配置され、対称性欠陥の端として表される。別の言い方をするなら、プラケット一周してきたときに（周期境界条件ではなく）半周期境界条件を課すという言い方もできる。
+
+
+\begin{figure}
+  \centering
+  \includegraphics{disorder2.pdf}
+  \caption{$a,b$の和をとってしまった後での無秩序演算子の様子。赤で表した経路は対称性欠陥$\eta$を表している。つまり、赤の線と交わっているリンクは反強磁性になっている。$\mu$演算子は$\eta$の端のプラケットに配置されている。}
+  \label{fig:disorder2}
+\end{figure}
 
 \appendix
 \section{計算}
