@@ -55,44 +55,39 @@
 \end{flushright}
 
 \section{導入}
-このノートでは２次元Ising模型のKramers-Wannier (KW) 双対性\cite{Kramers:1941kn,Kramers:1941zz}の導出をまとめている。
+このノートでは、２次元Ising模型のKramers-Wannier (KW) 双対性\cite{Kramers:1941kn,Kramers:1941zz}の導出をまとめている。もちろん、KW双対性の導出は、詳細な統計力学の教科書にも掲載されている\footnote{例えば\cite{itzykson1991statistical,Nishimori}など。}。それにもかかわらず、このノートで改めてまとめることにしたのは、熱力学極限だけでなく、精密な双対性についても論じたかったからである。Ising模型の相転移点の決定に際しては、熱力学極限だけで充分である。しかし、最近のトポロジカルな議論に用いる場合には、離散対称性のゲージ化に関する詳細な議論が求められる。本ノートでは、そのような観点も含めて導出を行う。
 
-もちろんKW双対性の導出は少し詳しい目の統計力学の教科書に出ている。それこのノートであらためてまとめておこうと思ったのは熱力学極限だけでなく、精密な双対性について述べたかったからである。
-もちろんIsing模型の相転移点の決定などに使う場合には熱力学極限だけで十分である。
-しかし、最近のトポロジカルな議論に使う場合には、離散対称性のゲージ化に関する精密な議論が必要である。
-ここではそれも含めて導出する。
-
-Ising模型は次のようなものである。2次元の正方格子を考える。ここでは有限の格子でトーラス状に周期境界条件が課されているとする。サイトのラベルを$i,j$とする。各サイトに「スピン」の自由度$a_{i}=0,1$を置く。各リンクを両端のサイトのラベル$i,j$を用いて$\expval{ij}$のように表す。定数のパラメーターを$K>0$としてイジング模型の分配関数は
+Ising模型について述べる。2次元の正方格子を考える。ここでは有限の格子で、トーラス状に周期境界条件が課されているとする。各サイトをラベル$i,j$で示す。各サイトには「スピン」の自由度$a_{i}=0,1$を置く。各リンクは両端のサイトのラベル$i,j$を用いて$\expval{ij}$のように表す。定数パラメーターを$K>0$と定めると、Ising模型の分配関数は以下の通りである。
 \begin{important}
 \begin{align}
-  \ZIs(K)=\sum_{\{a\}} \exp\left(
-    K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
-  \right).\label{Ising}
+\ZIs(K)=\sum_{{a}} \exp\left(
+K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
+\right).\label{Ising}
 \end{align}
 \end{important}
-ここで$\sum_{\{a\}}$はすべてのスピンの配位についての和である。パラメーター$K$のことを「逆温度」と呼ぶことにする。\footnote{厳密には本当の逆温度を$\beta$、結合のパラメーターを$J$として$K=\beta J$である。ただ、この二つのパラメーターは$K$の形でしか現れない。}
+ここで$\sum_{{a}}$はすべてのスピン配位についての和を指す。パラメーター$K$は「逆温度」と呼ぶこととする。\footnote{厳密には、本当の逆温度を$\beta$、結合のパラメーターを$J$として$K=\beta J$である。ただし、これら二つのパラメーターは$K$の形でしか現れない。}
 
-一方で、Ising模型の$\Zb_2$対称性をゲージ化した模型の分配関数は、
+一方で、Ising模型の$\Zb_2$対称性をゲージ化した模型の分配関数は以下のようになる：
 \begin{important}
-  \begin{align}
-    \ZGIs(K)=\frac12 \sum_{\text{boundary conditions}}
-    \sum_{\{a\}}\exp\left(
-      K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
-    \right)
-    \label{Ising/Z2}
-  \end{align}    
+\begin{align}
+\ZGIs(K)=\frac12 \sum_{\text{boundary conditions}}
+\sum_{{a}}\exp\left(
+K\sum_{\expval{ij}:\text{すべてのリンク} }(-1)^{a_i+a_j}
+\right)
+\label{Ising/Z2}
+\end{align}
 \end{important}
-となる。ここで$\sum_{\text{boundary conditions}}$はトーラスの2つの周期の方向の境界条件を周期境界条件か反周期境界条件のどちらかを選ぶ4通りの境界条件についての和である。弦理論をご存知の方は、「オービフォールド」の操作をしたものである。
+ここで$\sum_{\text{boundary conditions}}$はトーラスの2つの周期の方向の境界条件を周期境界条件か反周期境界条件のどちらかを選ぶ4通りの境界条件についての和である。弦理論になじみのある方なら、「オービフォールド」の操作と理解することができるだろう。
 
-Kramers-Wannier双対性の厳密な表式はサイトの数を$V$として
+Kramers-Wannier双対性の厳密な表式は、サイトの数を$V$とした場合、以下の通りである：
 \begin{important}
-  \begin{align}
-    \frac{1}{(\sinh 2K)^{2V}}\ZGIs(K)=
-    \frac{1}{(\sinh 2\Kt)^{2V}}\ZIs(\Kt),\quad \sinh 2K \sinh 2\Kt=1
-    \label{KWduality}
-  \end{align}  
+\begin{align}
+\frac{1}{(\sinh 2K)^{2V}}\ZGIs(K)=
+\frac{1}{(\sinh 2\Kt)^{2V}}\ZIs(\Kt),\quad \sinh 2K \sinh 2\Kt=1
+\label{KWduality}
+\end{align}
 \end{important}
-である。因子$\frac{1}{(\sinh 2K)^{2V}}$は局所的な項として作用に入れることができる。したがって、この式は二つの系の等価性を表している。このノートの目的は、この式の証明を与えることと、関連する事柄について説明することである。
+ここでの因子$\frac{1}{(\sinh 2K)^{2V}}$は、作用の中に局所的な項として組み込むことが可能である。したがって、この式は二つの系の等価性を表している。このノートの目的は、この式の証明を与え、関連する事項について説明することである。
 
 \section{Kramers-Wannier双対性の導出}
 証明に関して次のような系を考える。まず、各リンク$\ell$に自由度$b_{\ell}=0,1$を置く。また、各プラケット$p$に自由度$c_{p}$を置く。その分配関数を
