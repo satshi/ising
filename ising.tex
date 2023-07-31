@@ -57,7 +57,7 @@
 \section{導入}
 このノートでは、２次元Ising模型のKramers-Wannier (KW) 双対性\cite{Kramers:1941kn,Kramers:1941zz}の導出をまとめている。もちろん、KW双対性の導出は、詳細な統計力学の教科書にも掲載されている\footnote{例えば\cite{itzykson1991statistical,Nishimori}など。}。それにもかかわらず、このノートで改めてまとめることにしたのは、熱力学極限だけでなく、精密な双対性についても論じたかったからである。Ising模型の相転移点の決定に際しては、熱力学極限だけで充分である。しかし、最近のトポロジカルな議論に用いる場合には、離散対称性のゲージ化に関する詳細な議論が求められる。本ノートでは、そのような観点も含めて導出を行う。
 
-Ising模型について述べる。2次元の正方格子を考える。ここでは有限の格子で、トーラス状に周期境界条件が課されているとする。各サイトをラベル$i,j$で示す。各サイトには「スピン」の自由度$a_{i}=0,1$を置く。各リンクは両端のサイトのラベル$i,j$を用いて$\expval{ij}$のように表す。定数パラメーターを$K>0$と定めると、Ising模型の分配関数は以下の通りである。
+まずIsing模型の定義を述べよう。2次元の正方格子を考える。ここでは有限の格子で、トーラス状に周期境界条件が課されているとする。各サイトをラベル$i,j$で示す。各サイトには「スピン」の自由度$a_{i}=0,1$を置く。各リンクは両端のサイトのラベル$i,j$を用いて$\expval{ij}$のように表す。定数パラメーターを$K>0$と定めると、Ising模型の分配関数は以下の通りである。
 \begin{important}
 \begin{align}
 \ZIs(K)=\sum_{{a}} \exp\left(
@@ -92,7 +92,7 @@ Kramers-Wannier双対性の厳密な表式は、サイトの数を$V$とした�
 \section{Kramers-Wannier双対性の導出}
 証明に関して次のような系を考える。まず、各リンク$\ell$に自由度$b_{\ell}=0,1$を置く。また、各プラケット$p$に自由度$c_{p}$を置く。その分配関数を
 \begin{align}
-  Z(K)=\sum_{\{b\}}\frac{1}{2^{V}} \exp\left[
+  Z(K)=\sum_{\{b\}}\sum_{\{c\}}\frac{1}{2^{V}} \exp\left[
     K\sum_{\ell:\text{links}}(-1)^{b_{\ell}}+i\pi\sum_{\substack{p=\expval{\ell_1 \ell_2 \ell_3 \ell_4}:\\ \text{plaquettes}}} c_{p}(b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4})
   \right]
   \label{model1}
@@ -166,13 +166,20 @@ Kramers-Wannier双対性の厳密な表式は、サイトの数を$V$とした�
     K(-1)^{b_{\ell}}+i\pi (c_{p_1}+c_{p_2})b_{\ell}
   \right]
   =e^{K}+(-1)^{c}e^{-K}
+  =
+  \begin{cases}
+    2\cosh K, & (c=0)\\
+    2\sinh K, & (c=1)
+  \end{cases}
 \end{align}
-となる。ここで$c:=c_{p_1}+c_{p_2}$とした。これをさらに変形して
+となる。ここで$c:=c_{p_1}+c_{p_2} \mod 2$とした。$Z_{\ell}$はまとめて
 \begin{align}
   Z_{\ell}=2\cosh K (\tanh K)^{c}
-  =\sqrt{2\sinh 2K}\ e^{\Kt(-1)^c}\label{Zelltemp}
 \end{align}
-となる。ここで$\Kt$は
+と書ける。これはさらに\begin{align}
+  Z_{\ell}=\sqrt{2\sinh 2K}\ e^{\Kt(-1)^c}\label{Zelltemp}
+\end{align}
+と書き換えることができる。ここで$\Kt$は
 \begin{align}
   \tanh K = e^{-2\Kt}
 \end{align}
@@ -180,7 +187,7 @@ Kramers-Wannier双対性の厳密な表式は、サイトの数を$V$とした�
 \begin{align}
   \sinh 2 K \sinh 2\Kt =1 \label{dualK}
 \end{align}
-の式が導かれる。詳しい計算は付録\ref{sec:calculation}に書いておく。
+の式が導かれる。ここで行った双曲線関数の変形の詳細は付録\ref{sec:calculation}に書いておく。
 
 これを用いると分配関数は次のように書かれる。
 \begin{align}
@@ -189,7 +196,7 @@ Kramers-Wannier双対性の厳密な表式は、サイトの数を$V$とした�
   &=(\sinh 2K)^{V}\sum_{\{c\}}\prod_{\ell=\expval{pq}} e^{\Kt(-1)^{c_p+c_q}}\notag\\
   &=(\sinh 2K)^{V}\ZIs(\Kt).
 \end{align}
-
+ここの変形では、リンクの数が$2V$であることに注意する。
 
 \subsection{双対性のまとめ}
 
@@ -201,7 +208,7 @@ Kramers-Wannier双対性の厳密な表式は、サイトの数を$V$とした�
 
 \subsection{ゲージ化されたIsing模型のゲージ不変な定式化}
 
-ここでは、式\eqref{Ising}から始めて、ゲージ化されたIsingの作用をゲージ不変な形に書いておく。
+ここでは、式\eqref{Ising}から始めて、ゲージ化されたIsing模型の作用をゲージ不変な形に書いておく。
 
 Ising模型\eqref{Ising}に次のような操作をしてゲージ化する。
 \begin{itemize}
@@ -210,7 +217,7 @@ Ising模型\eqref{Ising}に次のような操作をしてゲージ化する。
   \begin{align}
     \deltamod_{b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4},0}=\sum_{c_p=0,1}\frac{1}{2}e^{\pi i (b_{\ell_1}+b_{\ell_2}+b_{\ell_3}+b_{\ell_4})}
   \end{align}
-  と書き換えておく。\footnote{このようなゲージ化を一般の格子ゲージ理論と区別して「トポロジカルなゲージ化」と呼ぶこともある。}
+  と書き換えておく\footnote{このようなゲージ化を一般の格子ゲージ理論と区別して「トポロジカルなゲージ化」と呼ぶこともある。}。
   \item ゲージ対称性を課す。ゲージ変換のパラメーターは各サイト$i$に置かれた$\lambda_i=0,1$である。リンク$\ell=\expval{ij}$上のゲージ場$b_{\expval{ij}}$とサイト$i$のスピン$a_{i}$はそれぞれ
   \begin{align}
     b_{\expval{ij}}'=b_{\expval{ij}}+\lambda_{i}+\lambda_{j},\quad
@@ -284,9 +291,9 @@ $a,b$を積分してしまった後で$\eta$がどのように表現されるか
 \end{figure}
 
 これをゲージ不変にするために$\eta$線演算子（$b$ Wilson line）をくっつけて
-$\mu_i=(-1)^{a_i+b_{\ell_1}+b_{\ell_2}+\dots}$を考える（図\ref{fig:disorder}参照）。ただし、$\ell_1,\ell_2,\dots$は$i$に端をもつ経路である。この演算子を（$(-1)^{c_p}$を秩序演算子としてのスピン演算子と言うのに対応して）無秩序演算子(disorder operator)とかスピン(disorder spin)と呼ばれる。次のようなことに注意する必要がある。
+$\mu_i=(-1)^{a_i+b_{\ell_1}+b_{\ell_2}+\dots}$を考える（図\ref{fig:disorder}参照）。ただし、$\ell_1,\ell_2,\dots$は$i$に端をもつ経路である。この演算子を（$(-1)^{c_p}$を秩序演算子としてのスピン演算子と言うのに対応して）無秩序演算子(disorder operator)とか無秩序スピン(disorder spin)と呼ばれる。次のようなことに注意する必要がある。
 \begin{itemize}
-  \item $\mu_i$は位置$i$だけでなく、くっつくWilson lineの経路によっている。ただし、Wilson lineはトポロジカルなので、Wilson lineの連続変形にはよっていない。このような演算子を非純正局所演算子(non-genuine local operator)と呼ぶことがある。反対の言葉は純正局所演算子(genuine local operator)で、スピン演算子$\sigma_{p}$はその例である。
+  \item $\mu_i$は位置$i$だけでなく、くっつくWilson lineの経路によっている。ただし、Wilson lineはトポロジカルなので、Wilson lineの連続変形にはよっていない。このような演算子を非純正局所演算子(non-genuine local operator)と呼ぶことがある。反対の言葉は純正局所演算子(genuine local operator)で、スピン演算子$\sigma_{p}$はその例である\footnote{この``genuine local operator''という用語は文献\cite{Kapustin:2014gua}から使われ始めた。}。
   \item 端のあるWilson lineは必ず反対側の端がある。したがって$\mu_i$は必ずペアで現れなければならない。
   \item 無秩序スピンの名前の由来は次のようなものである。$\sigma$スピン演算子（秩序演算子）の言葉で秩序相にあるときは、$\mu_i$の期待値が$0$になる（正確に言うなら、$\mu$を挿す２点を遠くに離す極限で２点関数が$0$になる）。逆に無秩序相にあるときは、$\mu$演算子が期待値を持つ（正確に言うなら、$\mu$を挿す２点を遠くに離す極限で２点関数が$0$にならない）。
 \end{itemize}
